@@ -55,7 +55,7 @@ module control (
 
             // BEQ
             7'b110_0011: begin
-                ImmSrc <= 2'b11;
+                ImmSrc <= 2'b10;
                 Branch <= 1;
                 ALUOp <= 2'b01;
             end
