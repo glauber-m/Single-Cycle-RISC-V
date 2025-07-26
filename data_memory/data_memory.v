@@ -1,5 +1,5 @@
 module data_memory (
-    input clk, rst,
+    input CLK, rst,
     input WE,
     input [31:0] A,
     input [31:0] WD,
@@ -8,7 +8,7 @@ module data_memory (
 
     reg [31:0] mem [0:65535];
 
-    always @(posedge clk) begin
+    always @(posedge CLK) begin
         if(rst)
             mem[32'h2000] <= 10;
         else

@@ -3,7 +3,7 @@ module register_file_TB;
     localparam ADDR_WIDTH = 5;// 4 registros ; 2 bits de endereço
     localparam REG_COUNT = 32;
 
-    reg clk, rst;
+    reg CLK, rst;
     reg WE3 ;
     reg [DATA_WIDTH -1:0] WD3 ;
     reg [ADDR_WIDTH -1:0] A1 ;
@@ -17,12 +17,12 @@ module register_file_TB;
     integer i;
 
     register_file #(32,5,32) dut
-    (clk,rst, WE3, WD3, A1, A2, A3, RD1, RD2,);
+    (CLK,rst, WE3, WD3, A1, A2, A3, RD1, RD2,);
 
-    always #1 clk = ~clk;
+    always #1 CLK = ~CLK;
 
     initial begin
-        clk = 0;
+        CLK = 0;
         for (i = 0; i < REG_COUNT-1; i = i + 1) begin
             A1 = i;
             A2 = i;

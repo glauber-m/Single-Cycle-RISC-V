@@ -3,7 +3,7 @@ module register_file #(
     parameter ADDR_WIDTH = 5,// 4 registros, 2 bits de endereço
     parameter REG_COUNT = 32
 )(
-    input wire clk,rst,
+    input wire CLK,rst,
     input wire WE3,
     input wire [DATA_WIDTH -1:0] WD3,
     input wire [ADDR_WIDTH -1:0] A1,
@@ -18,7 +18,7 @@ module register_file #(
     integer i;
 
     // Escrita síncrona
-    always @(posedge clk) begin
+    always @(posedge CLK) begin
         if (rst) begin
             for (i = 0; i < REG_COUNT; i=i+1 ) registers[i] <= 0;
             registers[5] <= 6; // Inicializando o registrador 5 com 6

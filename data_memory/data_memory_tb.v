@@ -1,13 +1,13 @@
 module data_memory_tb;
     
-    reg clk, rst; 
+    reg CLK, rst; 
     reg WE;
     reg [31:0] A;
     reg [31:0] WD;
     wire [31:0] RD;
 
     data_memory dut(
-        clk, rst,
+        CLK, rst,
         WE,
         A,
         WD,
@@ -16,10 +16,10 @@ module data_memory_tb;
 
     integer i;
 
-    always #1 clk = ~clk;
+    always #1 CLK = ~CLK;
 
     initial begin
-        clk = 0;
+        CLK = 0;
         rst = 1;
         A = 32'h2000;
         #2 rst = 0; 
