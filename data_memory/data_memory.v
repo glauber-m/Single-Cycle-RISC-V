@@ -18,7 +18,7 @@ module data_memory (
             mem[32'h2000] <= 10;
         end else begin
             if (WE) begin
-                if(A != 0) mem[A] <= WD;
+                mem[A] <= WD;
             end
         end
     end
