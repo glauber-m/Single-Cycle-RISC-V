@@ -16,8 +16,8 @@ module register_file #(
     // Banco de registradores
     reg [DATA_WIDTH -1:0] registers [0:REG_COUNT -1];
     
+    integer i;
     initial begin
-        integer i;
         for (i = 0; i < REG_COUNT; i = i + 1) begin
             registers[i] = 0;
         end

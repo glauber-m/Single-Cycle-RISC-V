@@ -7,8 +7,8 @@ module data_memory (
 );
 
     reg [31:0] mem [0:65535];
+    integer i;
     initial begin
-        integer i;
         for (i = 0; i < 65536; i = i + 1) begin
             mem[i] = 32'h00000000;
         end
