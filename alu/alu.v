@@ -17,12 +17,12 @@ module alu(
     // Flag de zero, nivel alto para resultado zero
     assign Zero = (ALUResult == 32'h00000000);
 
-    // Prepara o somador para subtracao nas operacoes 3'b001 e 3'b101
+    // Prepara o somador para subtracao nas operacoes 3'b001 (sub) e 3'b101 (slt)
     assign switch_b  = (~ALUControl[1] && ALUControl[0]) ? ~SrcB : SrcB;
     assign cin_adder = (~ALUControl[1] && ALUControl[0]);
 
     // Implementa o resultado da soma ou subtracao
-    assign result_adder = SrcA + switch_b + cin_adder;
+    assign result_adder = SrcA + switch_b + {{31{1'b0}}, cin_adder};
 
     // Operacoes bitwise
     assign result_and = SrcA & SrcB;
