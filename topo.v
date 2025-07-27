@@ -30,44 +30,46 @@ module topo(CLK, rst);
     localparam REG_COUNT = 32;
 
     mux m1 (
-        .in0(PCPlus4), 
-        .in1(PCTarget), 
-        .sel(PCSrc), 
+        .in0(PCPlus4),
+        .in1(PCTarget),
+        .sel(PCSrc),
         .d(PCNext)
     );
+
     register #(
         .N(DATA_WIDTH)
     ) reg1 (
-        .CLK(CLK), 
-        .rst(rst), 
-        .d(PCNext), 
+        .CLK(CLK),
+        .rst(rst),
+        .d(PCNext),
         .q(PC)
     );
 
     adder somador1 (
-        .OperandA(PC), 
-        .OperandB(32'd4), 
-        .CarryIn(1'b0), 
-        .Sum(PCPlus4), 
+        .OperandA(PC),
+        .OperandB(32'd4),
+        .CarryIn(1'b0),
+        .Sum(PCPlus4),
         .CarryOut()
     );
 
-    //lembrar de arrumar diretório
+    // lembrar de arrumar diretorio
     instructionMemory instMem (
-        .rst(rst), 
-        .A(PC), 
+        // .rst(rst), (removido para ficar de acordo com o livro)
+        .A(PC),
         .RD(Instr)
     );
+
     register_file #(
-        .DATA_WIDTH(DATA_WIDTH), 
-        .ADDR_WIDTH(ADDR_WIDTH), 
+        .DATA_WIDTH(DATA_WIDTH),
+        .ADDR_WIDTH(ADDR_WIDTH),
         .REG_COUNT(REG_COUNT)
     ) regFile (
-        .CLK(CLK), 
-        .rst(rst), 
-        .WE3(RegWrite), 
-        .WD3(Result), 
-        .A1(Instr[19:15]), 
+        // .rst(rst), (removido para ficar de acordo com o livro)
+        .CLK(CLK),
+        .WE3(RegWrite),
+        .WD3(Result),
+        .A1(Instr[19:15]),
         .A2(Instr[24:20]),
         .A3(Instr[11:7]),
         .RD1(SrcA),
@@ -75,59 +77,59 @@ module topo(CLK, rst);
     );
 
     extend ext(
-        .in(Instr[31:7]), 
-        .ImmSrc(ImmSrc), 
+        .in(Instr[31:7]),
+        .ImmSrc(ImmSrc),
         .out(ImmExt)
     );
 
     mux m2(
-        .in0(WriteData), 
-        .in1(ImmExt), 
-        .sel(ALUSrc), 
+        .in0(WriteData),
+        .in1(ImmExt),
+        .sel(ALUSrc),
         .d(SrcB)
     );
 
     alu alu (
-        .SrcA(SrcA), 
-        .SrcB(SrcB), 
-        .ALUControl(ALUControl), 
-        .Zero(Zero), 
+        .SrcA(SrcA),
+        .SrcB(SrcB),
+        .ALUControl(ALUControl),
+        .Zero(Zero),
         .ALUResult(ALUResult)
     );
 
     adder somador2 (
-        .OperandA(PC), 
-        .OperandB(ImmExt), 
-        .CarryIn(1'b0), 
+        .OperandA(PC),
+        .OperandB(ImmExt),
+        .CarryIn(1'b0),
         .Sum(PCTarget)
     );
 
     data_memory dataMem (
-        .CLK(CLK), 
-        .rst(rst), 
-        .WE(MemWrite), 
-        .A(ALUResult), 
-        .WD(WriteData), 
+        // .rst(rst), (removido para ficar de acordo com o livro)
+        .CLK(CLK),
+        .WE(MemWrite),
+        .A(ALUResult),
+        .WD(WriteData),
         .RD(ReadData)
     );
     mux m3 (
-        .in0(ALUResult), 
-        .in1(ReadData), 
-        .sel(ResultSrc), 
+        .in0(ALUResult),
+        .in1(ReadData),
+        .sel(ResultSrc),
         .d(Result)
     );
 
     control contr(
-        .PCSrc(PCSrc), 
-        .ResultSrc(ResultSrc), 
-        .MemWrite(MemWrite),  
-        .ALUControl(ALUControl), 
-        .ALUSrc(ALUSrc),  
-        .ImmSrc(ImmSrc), 
-        .RegWrite(RegWrite),  
-        .op(Instr[6:0]), 
-        .funct3(Instr[14:12]), 
-        .funct7(Instr[30]), 
+        .PCSrc(PCSrc),
+        .ResultSrc(ResultSrc),
+        .MemWrite(MemWrite),
+        .ALUControl(ALUControl),
+        .ALUSrc(ALUSrc),
+        .ImmSrc(ImmSrc),
+        .RegWrite(RegWrite),
+        .op(Instr[6:0]),
+        .funct3(Instr[14:12]),
+        .funct7(Instr[30]),
         .Zero(Zero)
     );
 endmodule
