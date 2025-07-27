@@ -7,8 +7,8 @@ module instructionMemory (
     reg [31:0] rom [0:255];
 
     initial begin
-        // $readmemh("/home/cidigital/cidigital/circuitos_III/projeto/data.txt", rom);
-        $readmemh("C:/CI_Digital/Trabalho/Single-Cycle-RISC-V/instruction_memory/data.txt", rom);
+        // $readmemh("/home/cidigital/cidigital/circuitos_III/projeto/test_0.txt", rom);
+        $readmemh("C:/CI_Digital/Trabalho/Single-Cycle-RISC-V/instruction_memory/test_0.txt", rom);
         /*
         FFC4A303 L7 lw  x6, -4(x9)  // Result --> 10 (2000)
         0064A423  sw  x6, 8(x9)     // Result --> 10 (200C)
