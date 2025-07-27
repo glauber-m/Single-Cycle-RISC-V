@@ -32,7 +32,7 @@ module topo_tb();
     initial begin
         // Abre arquivo VCD para o DUT com profundidade 1
         $dumpfile("sim.vcd");
-        $dumpvars(1, DUT);
+        $dumpvars(0, DUT);
 
         $display("Iniciando teste da microarquitetura RISC-V single cycle...");
         $display("----------------------------------------------------------");
@@ -60,7 +60,7 @@ module topo_tb();
         $display("Comportamento esperado: glu glu glu");
         @(negedge CLK) print_line();
 
-        repeat (20) @(negedge CLK); // temporario, para terminar a execucao
+        repeat (40) @(negedge CLK); // temporario, para terminar a execucao
 
         // Suspende a execucao do teste para analise
         $stop;
