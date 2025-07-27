@@ -1,43 +1,40 @@
 module register_file #(
     parameter DATA_WIDTH = 32,
     parameter ADDR_WIDTH = 5,
-    parameter REG_COUNT = 32
+    parameter REG_COUNT  = 32
 )(
-    input wire CLK,rst,
-    input wire WE3,
-    input wire [DATA_WIDTH -1:0] WD3,
-    input wire [ADDR_WIDTH -1:0] A1,
-    input wire [ADDR_WIDTH -1:0] A2,
-    input wire [ADDR_WIDTH -1:0] A3,
-    output wire [DATA_WIDTH -1:0] RD1,
-    output wire [DATA_WIDTH -1:0] RD2
+    input  wire CLK,
+    input  wire WE3,
+    input  wire [ADDR_WIDTH-1:0] A1,
+    input  wire [ADDR_WIDTH-1:0] A2,
+    input  wire [ADDR_WIDTH-1:0] A3,
+    input  wire [DATA_WIDTH-1:0] WD3,
+    output wire [DATA_WIDTH-1:0] RD1,
+    output wire [DATA_WIDTH-1:0] RD2
 );
 
     // Banco de registradores
-    reg [DATA_WIDTH -1:0] registers [0:REG_COUNT -1];
-    
-    integer i;
-    initial begin
-        for (i = 0; i < REG_COUNT; i = i + 1) begin
-            registers[i] = 0;
-        end
-    end
+    reg [DATA_WIDTH-1:0] registers [0:REG_COUNT-1];
 
-    // Escrita síncrona
+    // Leitura assincrona
+    // Utiliza logica combinacional para o registro 0 (hardwired em 0)
+    assign RD1 = (A1 != 0) ? registers[A1] : 0;
+    assign RD2 = (A2 != 0) ? registers[A2] : 0;
+
+    // Escrita sincrona
+    // Protege contra escrita no registro 0
     always @(posedge CLK) begin
-        if (rst) begin
-            registers[5] <= 6; // Inicializando o registrador 5 com 6
-            registers[9] <= 32'h2004; // Inicializando o registrador 9 com 2004h
+        if (WE3) begin      
+            if (A3 != 0) begin 
+                registers[A3] <= WD3;
+            end
         end
-
-        else begin
-            if (WE3 && A3 != 0) registers[A3] <= WD3;
-        end
-            
     end
 
-    // // Leitura combinacional (assíncrona)
-    assign RD1 = registers[A1];
-    assign RD2 = registers[A2];
+    initial begin
+        registers[0] <= 32'h00000000;
+        registers[5] <= 32'h00000006;
+        registers[9] <= 32'h00002004;
+    end
 
 endmodule
