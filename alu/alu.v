@@ -1,11 +1,10 @@
 module alu(
-
-        input  wire [31:0] SrcA,       // Primeiro operando
-        input  wire [31:0] SrcB,       // Segundo operando
-        input  wire [2:0]  ALUControl, // Seleciona a operacao
-        output wire        Zero,       // Flag para resultado zero
-        output reg  [31:0] ALUResult   // Saida numerica da ALU
-    );
+    input  wire [31:0] SrcA,       // Primeiro operando
+    input  wire [31:0] SrcB,       // Segundo operando
+    input  wire [2:0]  ALUControl, // Seleciona a operacao
+    output wire        Zero,       // Flag para resultado zero
+    output reg  [31:0] ALUResult   // Saida numerica da ALU
+);
 
     wire [31:0] switch_b;     // Operando selecionado para soma ou subtracao
     wire        cin_adder;    // Carry do somador, ativo para subtracao
