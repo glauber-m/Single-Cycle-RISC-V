@@ -101,7 +101,8 @@ module topo(CLK, rst);
         .OperandA(PC),
         .OperandB(ImmExt),
         .CarryIn(1'b0),
-        .Sum(PCTarget)
+        .Sum(PCTarget),
+        .CarryOut()
     );
 
     data_memory dataMem (
