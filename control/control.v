@@ -60,6 +60,13 @@ module control (
                 ALUOp <= 2'b01;
             end
 
+            // ADDI
+            7'b0010011: begin
+                RegWrite <= 1;
+                ALUSrc <= 1;
+                ALUOp <= 2'b10;
+            end
+
             default: begin
                 ResultSrc <= 0;
                 MemWrite <= 0;
