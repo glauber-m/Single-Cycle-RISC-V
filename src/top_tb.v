@@ -5,7 +5,7 @@ module top_tb();
     reg rst;
 
     // Cria instancia do DUT
-    topo DUT (
+    top DUT (
         .CLK(CLK),
         .rst(rst)
     );
