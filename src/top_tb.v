@@ -1,6 +1,4 @@
-`timescale 1ns / 1ns
-
-module topo_tb();
+module top_tb();
 
     // Declara sinais do DUT
     reg CLK;

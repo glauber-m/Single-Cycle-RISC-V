@@ -1,5 +1,4 @@
-module topo(CLK, rst);
-
+module top(CLK, rst);
     input wire CLK, rst;
 
     wire       PCSrc;
@@ -53,9 +52,7 @@ module topo(CLK, rst);
         .CarryOut()
     );
 
-    // lembrar de arrumar diretorio
     instructionMemory instMem (
-        // .rst(rst), (removido para ficar de acordo com o livro)
         .A(PC),
         .RD(Instr)
     );
@@ -65,7 +62,6 @@ module topo(CLK, rst);
         .ADDR_WIDTH(ADDR_WIDTH),
         .REG_COUNT(REG_COUNT)
     ) regFile (
-        // .rst(rst), (removido para ficar de acordo com o livro)
         .CLK(CLK),
         .WE3(RegWrite),
         .WD3(Result),
@@ -106,7 +102,6 @@ module topo(CLK, rst);
     );
 
     data_memory dataMem (
-        // .rst(rst), (removido para ficar de acordo com o livro)
         .CLK(CLK),
         .WE(MemWrite),
         .A(ALUResult),
@@ -134,5 +129,3 @@ module topo(CLK, rst);
         .Zero(Zero)
     );
 endmodule
-
-// estacoinamento de mouse  [                               ]
