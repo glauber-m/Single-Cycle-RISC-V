@@ -1,13 +1,13 @@
 module top(CLK, rst);
     input wire CLK, rst;
 
-    wire       PCSrc;
-    wire       ResultSrc;
-    wire       MemWrite;
-    wire [2:0] ALUControl;
-    wire       ALUSrc;
-    wire [1:0] ImmSrc;
-    wire       RegWrite;
+    wire        PCSrc;
+    wire        ResultSrc;
+    wire        MemWrite;
+    wire [ 2:0] ALUControl;
+    wire        ALUSrc;
+    wire [ 1:0] ImmSrc;
+    wire        RegWrite;
 
     wire [31:0] Instr;
     wire [31:0] PC;
@@ -24,9 +24,9 @@ module top(CLK, rst);
     wire [31:0] ReadData;
     wire [31:0] Result;
 
-    localparam DATA_WIDTH = 32;
-    localparam ADDR_WIDTH = 5;
-    localparam REG_COUNT = 32;
+    localparam  DATA_WIDTH = 32;
+    localparam  ADDR_WIDTH = 5;
+    localparam  REG_COUNT = 32;
 
     mux m1 (
         .in0(PCPlus4),
