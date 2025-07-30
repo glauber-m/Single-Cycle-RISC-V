@@ -6,7 +6,7 @@ module instructionMemory (
     reg [31:0] rom [0:255];
 
     initial begin
-        $readmemh("C:/CI_Digital/Trabalho/Single-Cycle-RISC-V/instruction_memory/test_1.txt", rom);
+        $readmemh("C:/CI_Digital/Trabalho/Single-Cycle-RISC-V/src/instruction_memory/test_1.txt", rom);
     end
 
     // Le os dados da ROM
