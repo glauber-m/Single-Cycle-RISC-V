@@ -24,12 +24,12 @@ module control (
     always @(*) begin
         ResultSrc <= 0;
         MemWrite <= 0;
-        ALUControl <= 3'b111; // Default ALU operation
+        ALUControl <= 3'b111;
         ALUSrc <= 0;
-        ImmSrc <= 2'b00; // Default immediate source
+        ImmSrc <= 2'b00;
         RegWrite <= 0;
         Branch <= 0;
-        ALUOp <= 2'b00; // Default ALU operation
+        ALUOp <= 2'b00;
 
         case (op)
             // LW
@@ -39,6 +39,7 @@ module control (
                 ResultSrc <= 1;
                 ALUOp <= 2'b00;
             end
+            
             // SW
             7'b010_0011: begin
                 MemWrite <= 1;
@@ -94,7 +95,7 @@ module control (
                     default: ALUControl <= 3'b111;
                 endcase
             end
-            default: ALUControl <= 3'b111; // Default
+            default: ALUControl <= 3'b111;
         endcase
     end
 endmodule
