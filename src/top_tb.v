@@ -1,47 +1,67 @@
+`timescale 1ns / 1ns
+
 module top_tb();
 
-    // Declara sinais do DUT
+    // declara sinais do dut
     reg CLK;
     reg rst;
 
-    // Cria instancia do DUT
-    top DUT (
+    // cria instancia do dut
+    top dut(
         .CLK(CLK),
         .rst(rst)
     );
 
-    // Gera sinal de clock com periodo de 20ns (f=50MHz)
-    initial #0  CLK = 1'b0;
-    always  #10 CLK = ~CLK;
+    // inicializa posicoes do data_memory para teste
+    initial begin
+        dut.dataMem.mem[32'h00002000] = 32'h00000005;
+        dut.dataMem.mem[32'h00002008] = 32'h0000000A;
+        dut.dataMem.mem[32'h0000200C] = 32'h00000001;
+    end
 
-    // Gera pulso de reset durante terceiro e quarto ciclo de clock
-    initial #0  rst = 1'b0;
-    initial #45 rst = 1'b1;
-    initial #75 rst = 1'b0;
+    // inicializa posicoes do instruction_memory com programa de teste
+    initial begin
+        $readmemh("/home/daniel/Single-Cycle-RISC-V-main/src/instruction_memory/test_1.txt", dut.instMem.rom);
+    end
 
-    // Task para adicionar linhas de monitoramento ao log da simulacao
+    // inicializa posicoes do register_file para teste
+    initial begin
+        dut.regFile.registers[0] <= 32'h00000000;
+        dut.regFile.registers[9] <= 32'h00002004;
+    end
+
+    // gera sinal de clock com periodo de 20ns (f=50MHz)
+    initial      CLK = 1'b0;
+    always #(10) CLK = ~CLK;
+
+    // gera pulso de reset durante terceiro e quarto ciclo de clock
+    initial       rst = 1'b0;
+    initial #(45) rst = 1'b1;
+    initial #(75) rst = 1'b0;
+
+    // task para adicionar linhas de monitoramento ao log da simulacao
     task print_line();
         $display(
-            "| %3tns |",
+            "| %3dns |",
             $time
         );
     endtask
 
     initial begin
-        // Abre arquivo VCD para o DUT com profundidade 1
+        // abre arquivo vcd para o dut
         $dumpfile("sim.vcd");
-        $dumpvars(0, DUT);
+        $dumpvars(0, dut);
 
         $display("Iniciando teste da microarquitetura RISC-V single cycle...");
         $display("----------------------------------------------------------");
         $display("| Tempo |");
         $display("----------------------------------------------------------");
 
-        // Mostra o estado do sistema antes e apos o reset
+        // mostra o estado do sistema antes e apos o reset
         @(posedge rst) print_line();
         @(negedge rst) print_line();
 
-        // Monitora o estado do sistema durante o carregamento das instrucoes
+        // monitora o estado do sistema durante o carregamento das instrucoes
         $display("Carregando primeira instrucao: sub x3, x3, x1");
         $display("Comportamento esperado: glu glu glu");
         @(negedge CLK) print_line();
@@ -60,7 +80,7 @@ module top_tb();
 
         repeat (40) @(negedge CLK); // temporario, para terminar a execucao
 
-        // Suspende a execucao do teste para analise
+        // suspende a execucao do teste para analise
         $stop;
 
         $display("Encerrando teste da microarquitetura RISC-V single cycle...");
