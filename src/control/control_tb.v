@@ -1,4 +1,4 @@
-module tb_control;
+module control_tb;
     reg     [6:0]   op;
     reg     [2:0]   funct3;
     reg             funct7;
