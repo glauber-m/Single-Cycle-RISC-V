@@ -1,10 +1,10 @@
-module register_file #(
+module register_file#(
     parameter DATA_WIDTH = 32,
     parameter ADDR_WIDTH = 5,
     parameter REG_COUNT  = 32
 )(
-    input  wire CLK,
-    input  wire WE3,
+    input  wire                  CLK,
+    input  wire                  WE3,
     input  wire [ADDR_WIDTH-1:0] A1,
     input  wire [ADDR_WIDTH-1:0] A2,
     input  wire [ADDR_WIDTH-1:0] A3,
@@ -24,17 +24,11 @@ module register_file #(
     // Escrita sincrona
     // Protege contra escrita no registro 0
     always @(posedge CLK) begin
-        if (WE3) begin      
-            if (A3 != 0) begin 
+        if (WE3) begin
+            if (A3 != 0) begin
                 registers[A3] <= WD3;
             end
         end
-    end
-
-    initial begin
-        registers[0] <= 32'h00000000;
-        registers[5] <= 32'h00000006;
-        registers[9] <= 32'h00002004;
     end
 
 endmodule
