@@ -44,14 +44,14 @@ module top(CLK, rst);
         .q(PC)
     );
 
-    adder soma_plus4(
+    adder somaPlus4(
         .a_in(PC),
         .b_in(32'd4),
         .car_in(1'b0),
         .result(PCPlus4)
     );
 
-    instructionMemory instMem(
+    instruction_memory instMem(
         .A(PC),
         .RD(Instr)
     );
@@ -71,7 +71,7 @@ module top(CLK, rst);
         .RD2(WriteData)
     );
 
-    extend ext(
+    extend ext1(
         .in(Instr[31:7]),
         .ImmSrc(ImmSrc),
         .out(ImmExt)
@@ -84,7 +84,7 @@ module top(CLK, rst);
         .d(SrcB)
     );
 
-    alu alu(
+    alu alu1(
         .SrcA(SrcA),
         .SrcB(SrcB),
         .ALUControl(ALUControl),
@@ -92,7 +92,7 @@ module top(CLK, rst);
         .ALUResult(ALUResult)
     );
 
-    adder soma_target(
+    adder somaTarget(
         .a_in(PC),
         .b_in(ImmExt),
         .car_in(1'b0),
@@ -114,7 +114,7 @@ module top(CLK, rst);
         .d(Result)
     );
 
-    control contr(
+    control ctrl1(
         .PCSrc(PCSrc),
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
