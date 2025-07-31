@@ -26,42 +26,41 @@ module top(CLK, rst);
 
     localparam  DATA_WIDTH = 32;
     localparam  ADDR_WIDTH = 5;
-    localparam  REG_COUNT = 32;
+    localparam  REG_COUNT  = 32;
 
-    mux m1 (
+    mux m1(
         .in0(PCPlus4),
         .in1(PCTarget),
         .sel(PCSrc),
         .d(PCNext)
     );
 
-    register #(
+    register#(
         .N(DATA_WIDTH)
-    ) reg1 (
+    ) reg1(
         .CLK(CLK),
         .rst(rst),
         .d(PCNext),
         .q(PC)
     );
 
-    adder somador1 (
-        .OperandA(PC),
-        .OperandB(32'd4),
-        .CarryIn(1'b0),
-        .Sum(PCPlus4),
-        .CarryOut()
+    adder soma_plus4(
+        .a_in(PC),
+        .b_in(32'd4),
+        .car_in(1'b0),
+        .result(PCPlus4)
     );
 
-    instructionMemory instMem (
+    instructionMemory instMem(
         .A(PC),
         .RD(Instr)
     );
 
-    register_file #(
+    register_file#(
         .DATA_WIDTH(DATA_WIDTH),
         .ADDR_WIDTH(ADDR_WIDTH),
         .REG_COUNT(REG_COUNT)
-    ) regFile (
+    ) regFile(
         .CLK(CLK),
         .WE3(RegWrite),
         .WD3(Result),
@@ -85,7 +84,7 @@ module top(CLK, rst);
         .d(SrcB)
     );
 
-    alu alu (
+    alu alu(
         .SrcA(SrcA),
         .SrcB(SrcB),
         .ALUControl(ALUControl),
@@ -93,22 +92,22 @@ module top(CLK, rst);
         .ALUResult(ALUResult)
     );
 
-    adder somador2 (
-        .OperandA(PC),
-        .OperandB(ImmExt),
-        .CarryIn(1'b0),
-        .Sum(PCTarget),
-        .CarryOut()
+    adder soma_target(
+        .a_in(PC),
+        .b_in(ImmExt),
+        .car_in(1'b0),
+        .result(PCTarget)
     );
 
-    data_memory dataMem (
+    data_memory dataMem(
         .CLK(CLK),
         .WE(MemWrite),
         .A(ALUResult),
         .WD(WriteData),
         .RD(ReadData)
     );
-    mux m3 (
+
+    mux m3(
         .in0(ALUResult),
         .in1(ReadData),
         .sel(ResultSrc),
@@ -128,4 +127,5 @@ module top(CLK, rst);
         .funct7(Instr[30]),
         .Zero(Zero)
     );
+
 endmodule
