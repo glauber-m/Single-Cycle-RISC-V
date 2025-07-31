@@ -68,6 +68,8 @@ module control_tb();
         funct3 = 3'h5;
         #10;
         funct3 = 3'h0;
+        #10;
+        $stop;
     end
 
 endmodule
