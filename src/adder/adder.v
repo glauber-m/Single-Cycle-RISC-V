@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 // somador de 32 bits utilizando arvore de sklansky
 // referencias: slide 7 da aula 31 (sd122) e pag. 242 do livro risc-v
 

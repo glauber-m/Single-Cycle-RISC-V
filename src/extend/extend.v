@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 module extend(in, ImmSrc, out);
 
     input wire [24:0] in;
@@ -12,7 +14,7 @@ module extend(in, ImmSrc, out);
     assign aux[31:7] = in;
     assign aux[6:0] = 7'b0; //zero padding
 
-    always@(*)begin  
+    always@(*)begin
         case (ImmSrc)
             2'b00: begin
                 out <= {{20{aux[31]}},aux[31:20]};

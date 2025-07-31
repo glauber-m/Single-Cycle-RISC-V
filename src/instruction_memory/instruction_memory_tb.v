@@ -1,4 +1,4 @@
-`timescale 1ns / 1ns
+`timescale 1ns / 100ps
 
 module instruction_memory_tb();
 
@@ -9,7 +9,7 @@ module instruction_memory_tb();
 
     // inicializa posicoes do instruction_memory com programa de teste
     initial begin
-        $readmemh("/home/daniel/Single-Cycle-RISC-V-main/src/instruction_memory/test_1.txt", dut.rom);
+        $readmemh("/home/aluno/Single-Cycle-RISC-V-main/src/instruction_memory/test_1.txt", dut.rom);
     end
 
     initial begin

@@ -1,4 +1,6 @@
-module control (
+`timescale 1ns / 100ps
+
+module control(
     PCSrc, ResultSrc, MemWrite, ALUControl, ALUSrc, ImmSrc, RegWrite,
     op, funct3, funct7, Zero
 );
@@ -39,7 +41,7 @@ module control (
                 ResultSrc <= 1;
                 ALUOp <= 2'b00;
             end
-            
+
             // SW
             7'b010_0011: begin
                 MemWrite <= 1;
@@ -98,4 +100,5 @@ module control (
             default: ALUControl <= 3'b111;
         endcase
     end
+
 endmodule

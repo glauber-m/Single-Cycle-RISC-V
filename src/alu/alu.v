@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 module alu(
     input  wire [31:0] SrcA,       // Primeiro operando
     input  wire [31:0] SrcB,       // Segundo operando

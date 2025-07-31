@@ -1,4 +1,6 @@
-module extend_tb;
+`timescale 1ns / 100ps
+
+module extend_tb();
 
     reg [24:0] in;
     reg [1:0] ImmSrc;

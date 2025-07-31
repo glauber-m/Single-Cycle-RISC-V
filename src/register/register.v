@@ -1,8 +1,12 @@
-module register #(parameter N = 32)(
-    input CLK,        
-    input rst,
-    input [N-1:0] d,     
-    output reg [N-1:0] q
+`timescale 1ns / 100ps
+
+module register#(
+    parameter N = 32
+)(
+    input  wire CLK,
+    input  wire rst,
+    input  wire [N-1:0] d,
+    output reg  [N-1:0] q
 );
 
     always @(posedge CLK or posedge rst) begin
@@ -12,4 +16,5 @@ module register #(parameter N = 32)(
             q <= d;
         end
     end
+
 endmodule

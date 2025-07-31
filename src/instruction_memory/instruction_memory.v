@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 module instruction_memory(
     input  wire [31:0] A,  //  endereco
     output wire [31:0] RD  //  dados

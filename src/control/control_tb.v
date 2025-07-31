@@ -1,4 +1,6 @@
-module control_tb;
+`timescale 1ns / 100ps
+
+module control_tb();
     reg     [6:0]   op;
     reg     [2:0]   funct3;
     reg             funct7;
@@ -13,16 +15,16 @@ module control_tb;
     wire            RegWrite;
 
     control dut(
-        .PCSrc(PCSrc), 
-        .ResultSrc(ResultSrc), 
-        .MemWrite(MemWrite), 
-        .ALUControl(ALUControl), 
-        .ALUSrc(ALUSrc), 
-        .ImmSrc(ImmSrc), 
+        .PCSrc(PCSrc),
+        .ResultSrc(ResultSrc),
+        .MemWrite(MemWrite),
+        .ALUControl(ALUControl),
+        .ALUSrc(ALUSrc),
+        .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
-        .op(op), 
-        .funct3(funct3), 
-        .funct7(funct7), 
+        .op(op),
+        .funct3(funct3),
+        .funct7(funct7),
         .Zero(Zero)
     );
 
@@ -67,4 +69,5 @@ module control_tb;
         #10;
         funct3 = 3'h0;
     end
+
 endmodule

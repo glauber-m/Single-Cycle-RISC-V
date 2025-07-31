@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 module register_file#(
     parameter DATA_WIDTH = 32,
     parameter ADDR_WIDTH = 5,

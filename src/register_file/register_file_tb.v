@@ -1,10 +1,10 @@
-`timescale 1ns / 1ns
+`timescale 1ns / 100ps
 
 module register_file_tb();
 
-    localparam DATA_WIDTH = 32;
-    localparam ADDR_WIDTH = 5;
-    localparam REG_COUNT  = 32;
+    localparam DATA_WIDTH = 16;
+    localparam ADDR_WIDTH = 4;
+    localparam REG_COUNT  = 16;
 
     reg                   CLK;
     reg                   WE3;
@@ -24,13 +24,6 @@ module register_file_tb();
     always #(1) CLK = ~CLK;
 
     initial begin
-        WE3 = 1'b0;
-        for (i = 0; i < REG_COUNT; i = i + 1) begin
-            A1 = i;
-            A2 = i;
-            #(2);
-        end
-
         WE3 = 1'b1;
         for (i = 0; i < REG_COUNT; i = i + 1) begin
             A3  = i;

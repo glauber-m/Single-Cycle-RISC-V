@@ -1,3 +1,5 @@
+`timescale 1ns / 100ps
+
 module data_memory(
     input  wire        CLK,
     input  wire        WE,

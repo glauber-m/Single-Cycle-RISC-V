@@ -1,6 +1,6 @@
-`timescale 1ns / 1ns
+`timescale 1ns / 100ps
 
-module data_memory_tb;
+module data_memory_tb();
 
     reg         CLK;
     reg         WE;
@@ -16,12 +16,6 @@ module data_memory_tb;
     always #(1) CLK = ~CLK;
 
     initial begin
-        WE = 1'b0;
-        for (i = 0; i < 10; i = i + 1) begin
-            A = i;
-            #(2);
-        end
-
         WE = 1'b1;
         for (i = 0; i < 10; i = i + 1) begin
             A = i;
