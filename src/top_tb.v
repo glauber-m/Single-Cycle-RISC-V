@@ -21,7 +21,8 @@ module top_tb();
 
     // inicializa posicoes do instruction_memory com programa de teste
     initial begin
-        $readmemh("/home/daniel/Single-Cycle-RISC-V-main/src/instruction_memory/test_1.txt", dut.instMem.rom);
+        // $readmemh("/home/daniel/Single-Cycle-RISC-V-main/src/instruction_memory/data.txt", dut.instMem.rom);
+        $readmemh("C:/CI_Digital/Trabalho/Single-Cycle-RISC-V/src/instruction_memory/data.txt", dut.instMem.rom);
     end
 
     // inicializa posicoes do register_file para teste
